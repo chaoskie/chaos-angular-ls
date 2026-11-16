@@ -1,0 +1,15 @@
+{
+  "name": "chaoskie-angular-ls",
+  "description": "Angular language server plugin for Claude Code",
+  "owner": { "name": "chaoskie" },
+  "plugins": [
+    {
+      "name": "angular-ls",
+      "description": "Angular language server for templates: diagnostics, hover and navigation in Angular HTML",
+      "version": "1.0.0",
+      "author": { "name": "chaoskie" },
+      "source": "./plugins/angular-ls",
+      "category": "development"
+    }
+  ]
+}

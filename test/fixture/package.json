@@ -1,0 +1,11 @@
+{
+  "name": "angular-ls-fixture",
+  "private": true,
+  "description": "Smallest Angular project the language server can load. Used by the smoke test only.",
+  "dependencies": {
+    "@angular/compiler": "22.2.4",
+    "@angular/core": "22.2.4",
+    "rxjs": "7.8.2",
+    "typescript": "6.0.3"
+  }
+}

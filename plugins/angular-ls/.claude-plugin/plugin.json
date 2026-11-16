@@ -1,0 +1,17 @@
+{
+  "name": "angular-ls",
+  "description": "Angular language server for templates: diagnostics, hover and navigation in Angular HTML",
+  "version": "1.0.0",
+  "author": { "name": "chaoskie" },
+  "license": "MIT",
+  "keywords": ["angular", "lsp", "language-server", "html"],
+  "lspServers": {
+    "angular": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/launch.cjs"],
+      "extensionToLanguage": { ".html": "html" },
+      "startupTimeout": 60000,
+      "maxRestarts": 3
+    }
+  }
+}
