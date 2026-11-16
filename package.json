@@ -1,5 +1,5 @@
 {
-  "name": "claude-angular-ls",
+  "name": "chaos-angular-ls",
   "private": true,
   "description": "Test scripts for the angular-ls Claude Code plugin. The plugin itself has no dependencies.",
   "license": "MIT",

@@ -41,14 +41,14 @@ Tested on Linux only. Claude Code was used to validate the manifests and to inst
 Add this repository as a plugin marketplace, then install the plugin:
 
 ```sh
-claude plugin marketplace add chaoskie/claude-angular-ls
-claude plugin install angular-ls@chaoskie-angular-ls
+claude plugin marketplace add chaoskie/chaos-angular-ls
+claude plugin install angular-ls@chaos-angular-ls
 ```
 
 From a local clone, give the path instead:
 
 ```sh
-claude plugin marketplace add ./claude-angular-ls
+claude plugin marketplace add ./chaos-angular-ls
 ```
 
 Restart Claude Code after installing.
@@ -62,13 +62,13 @@ The fix is to enable this plugin only inside Angular projects.
 1. Switch it off for your user account, once:
 
    ```sh
-   claude plugin disable angular-ls@chaoskie-angular-ls
+   claude plugin disable angular-ls@chaos-angular-ls
    ```
 
 2. Switch it on inside each Angular project. Run this in the project folder:
 
    ```sh
-   claude plugin enable angular-ls@chaoskie-angular-ls --scope local
+   claude plugin enable angular-ls@chaos-angular-ls --scope local
    ```
 
    This writes the choice to `.claude/settings.local.json` in that project:
@@ -76,7 +76,7 @@ The fix is to enable this plugin only inside Angular projects.
    ```json
    {
      "enabledPlugins": {
-       "angular-ls@chaoskie-angular-ls": true
+       "angular-ls@chaos-angular-ls": true
      }
    }
    ```
@@ -107,7 +107,7 @@ It then tells the server to look for TypeScript and the Angular language service
 **See what the launcher would use.** Run this in your project folder. It prints the server folder and the lookup folders, then stops:
 
 ```sh
-node /path/to/claude-angular-ls/plugins/angular-ls/scripts/launch.cjs --print-config
+node /path/to/chaos-angular-ls/plugins/angular-ls/scripts/launch.cjs --print-config
 ```
 
 **"could not find @angular/language-server".** Install it with `npm install -g @angular/language-server`. If it is installed in an unusual place, set `ANGULAR_LS_SERVER_DIR` to the package folder.
@@ -130,7 +130,8 @@ node /path/to/claude-angular-ls/plugins/angular-ls/scripts/launch.cjs --print-co
 - Only `.html` files are sent to this server. Inline templates inside `.ts` files are not covered by this plugin.
 - The server needs a `tsconfig.json`. A loose `.html` file outside an Angular project gets no results.
 - Windows and macOS are untested. The launcher has code for Windows command shims, but nobody has run it there yet.
-- The tests talk to the language server directly. They do not start Claude Code.
+- The automated tests talk to the language server directly. They do not start Claude Code. Version 0.3.0 was also checked by hand in a Claude Code session on Linux: hover and go to definition through the LSP tool gave the right answers on the test project.
+- Diagnostics after an edit inside a Claude Code session are untested. The smoke test only checks that the server sends them.
 - Angular versions older than 22 are untested. The server itself says it needs `@angular/language-service` 15 or newer.
 
 ## Tests
@@ -146,6 +147,14 @@ npm test
 - `test/lsp-smoke.mjs` starts the server the way the plugin does. It sends `initialize`, opens the template of a small Angular project in `test/fixture`, and checks hover, go to definition and diagnostics.
 
 The template in `test/fixture` contains one deliberate error. The smoke test expects the server to report it.
+
+To try the plugin in a real session without installing it, start Claude Code in an Angular project with the plugin folder:
+
+```sh
+claude --plugin-dir /path/to/chaos-angular-ls/plugins/angular-ls
+```
+
+Then ask for a hover or a definition in a template through the LSP tool.
 
 If you have Claude Code installed, you can also run its own check:
 
